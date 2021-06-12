@@ -11,6 +11,9 @@ let food = {
     x: Math.floor(Math.random() * 15 + 1) * box,
     y: Math.floor(Math.random() * 15 + 1) * box
 }
+let score = 0;
+let highScore = localStorage.getItem("high_score");
+highScore !== null ? document.getElementById("high-score").innerHTML = highScore : document.getElementById("high-score").innerHTML = 0;
 
 function createBG() {
     context.fillStyle = "lightgreen";
@@ -39,11 +42,17 @@ function update(event) {
 }
 
 function startGame() {
-
     for (i = 1; i < snake.length; i++) {
         if (snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
             clearInterval(jogo);
-            alert("Game Over ! :( ")
+            if (highScore !== null) {
+                if (score > highScore) {
+                    localStorage.setItem("high_score", score)
+                }
+            } else {
+                localStorage.setItem("high_score", score)
+            }
+            alert(`Game Over ! :( \n Your score: ${score}`)
         }
     }
 
@@ -67,6 +76,8 @@ function startGame() {
     if (snakeX != food.x || snakeY != food.y) {
         snake.pop();
     } else {
+        score += 1;
+        document.getElementById("score").innerHTML = score;
         food.x = Math.floor(Math.random() * 15 + 1) * box,
             food.y = Math.floor(Math.random() * 15 + 1) * box
     }
@@ -79,5 +90,6 @@ function startGame() {
 
     snake.unshift(newHead)
 }
+
 
 let jogo = setInterval(startGame, 200);
