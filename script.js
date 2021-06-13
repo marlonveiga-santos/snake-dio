@@ -13,23 +13,41 @@ let food = {
 }
 let score = 0;
 let highScore = localStorage.getItem("high_score");
+
+var img = new Image();
+img.src = 'img/apple.png';
+
+var bgImg = new Image();
+bgImg.src = 'img/grass.jpg';
+
+var skTail = new Image();
+skTail.src = 'img/snake_tail.png';
+
+
 highScore !== null ? document.getElementById("high-score").innerHTML = highScore : document.getElementById("high-score").innerHTML = 0;
 
 function createBG() {
-    context.fillStyle = "lightgreen";
-    context.fillRect(0, 0, 16 * box, 16 * box);
+    //context.fillStyle = "lightgreen";
+    context.drawImage(bgImg, 0, 0, 16 * box, 16 * box);
+
+    //context.fillRect(0, 0, 16 * box, 16 * box);
 }
 
 function createSnake() {
     for (i = 0; i < snake.length; i++) {
         i === 0 ? context.fillStyle = "darkgreen" : context.fillStyle = "green";
-        context.fillRect(snake[i].x, snake[i].y, box, box);
+        //if (i > 0 && i === snake.length - 1) context.fillStyle = "pink";
+        if (i > 0 && i === snake.length - 1) { context.drawImage(skTail, snake[i].x, snake[i].y, box, box) } else {
+            context.fillRect(snake[i].x, snake[i].y, box, box);
+        }
     }
 }
 
 function drawFood() {
-    context.fillStyle = "red";
-    context.fillRect(food.x, food.y, box, box);
+    context.drawImage(img, food.x, food.y, box, box);
+
+    //context.fillStyle = "red";
+    //context.fillRect(food.x, food.y, box, box);
 }
 
 document.addEventListener("keydown", update);
