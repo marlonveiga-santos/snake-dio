@@ -11,11 +11,12 @@
 Reproduzir o famoso jogo da cobrinha (Snake)
 
 ## Conceitos aprendidos:
-- Criação de página HTML
-- Utilização de classes e ID para identificação
-- Utilização da api HTML canvas
+- Criação de página HTML.
+- Utilização de classes e ID para identificação.
+- Utilização da api HTML canvas.
 - Manipulação de eventos gerados pelo teclado.
-- Persistência por meio do uso do localstorage (adicionado por mim)
+- inserção de imagens utilizadas no canvas. (adicionado por mim)
+- Persistência por meio do uso do localstorage. (adicionado por mim)
 
 
 ## Fonte do treinamento:
@@ -25,3 +26,4 @@ Reproduzir o famoso jogo da cobrinha (Snake)
 ## Demo:
 
 ![Demonstration image](img/demo_image.png)
+![Demonstration image 2](img/demo_image_2.png)

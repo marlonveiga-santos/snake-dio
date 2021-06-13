@@ -14,48 +14,66 @@ let food = {
 let score = 0;
 let highScore = localStorage.getItem("high_score");
 
+let time = 200;
+
 var img = new Image();
 img.src = 'img/apple.png';
 
 var bgImg = new Image();
 bgImg.src = 'img/grass.jpg';
 
-var skTail = new Image();
-skTail.src = 'img/snake_tail.png';
+var headRight = new Image();
+headRight.src = 'img/head_right.png';
+
+var headLeft = new Image();
+headLeft.src = 'img/head_left.png';
+
+var headUp = new Image();
+headUp.src = 'img/head_up.png';
+
+var headDown = new Image();
+headDown.src = 'img/head_down.png';
 
 
 highScore !== null ? document.getElementById("high-score").innerHTML = highScore : document.getElementById("high-score").innerHTML = 0;
 
 function createBG() {
-    //context.fillStyle = "lightgreen";
     context.drawImage(bgImg, 0, 0, 16 * box, 16 * box);
-
-    //context.fillRect(0, 0, 16 * box, 16 * box);
 }
 
 function createSnake() {
     for (i = 0; i < snake.length; i++) {
-        i === 0 ? context.fillStyle = "darkgreen" : context.fillStyle = "green";
-        //if (i > 0 && i === snake.length - 1) context.fillStyle = "pink";
-        if (i > 0 && i === snake.length - 1) { context.drawImage(skTail, snake[i].x, snake[i].y, box, box) } else {
+        if (i === 0) {
+            if (direction === "right") {
+                context.drawImage(headRight, snake[i].x, snake[i].y, box, box)
+            } else if (direction === "left") {
+                context.drawImage(headLeft, snake[i].x, snake[i].y, box, box)
+            } else if (direction === "up") {
+                context.drawImage(headUp, snake[i].x, snake[i].y, box, box)
+            } else {
+                context.drawImage(headDown, snake[i].x, snake[i].y, box, box)
+            }
+        } else {
+            context.fillStyle = "#CDDC39";
             context.fillRect(snake[i].x, snake[i].y, box, box);
         }
     }
 }
 
+
 function drawFood() {
     context.drawImage(img, food.x, food.y, box, box);
-
-    //context.fillStyle = "red";
-    //context.fillRect(food.x, food.y, box, box);
 }
 
 document.addEventListener("keydown", update);
 
 function update(event) {
     if (event.keyCode == 37 && direction != "right") direction = "left";
+
     if (event.keyCode == 38 && direction != "down") direction = "up";
+
     if (event.keyCode == 39 && direction != "left") direction = "right";
+
     if (event.keyCode == 40 && direction != "up") direction = "down";
 }
 
@@ -105,8 +123,7 @@ function startGame() {
         x: snakeX,
         y: snakeY
     }
-
     snake.unshift(newHead)
 }
 
-let jogo = setInterval(startGame, 200);
+let jogo = setInterval(startGame, time);
